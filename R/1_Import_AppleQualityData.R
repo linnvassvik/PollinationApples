@@ -34,25 +34,28 @@ SeedSet_stages <- SeedSet %>%
   summarise(tot = sum(value)) %>%
   ungroup() %>%
   group_by(Apple_variety, Region, Location, Treatment) %>%
-  mutate(tot2 = sum(tot))
+  mutate(tot2 = sum(tot))  %>% 
+  rename(Total_Seeds_Stage = tot) %>% 
+  rename(Total_Seeds_Treatment = tot2)
 
 # Calculate percentage of each seed stage for each treatment  
-SeedSet_stages <- SeedSet_stages %>% 
-  mutate(percentage = tot/tot2)
+SeedSet_stages_Percentage <- SeedSet_stages %>% 
+  mutate(percentage = (Total_Seeds_Stage/Total_Seeds_Treatment)*100) %>% 
+  rename(Percentage_Seeds_Stage = percentage)
 
 
 #Separate Seed Set measurements based on apple variety and region
-Summerred <- filter(SeedSet_stages, Apple_variety == 'Summerred') 
+Summerred <- filter(SeedSet_stages_Percentage, Apple_variety == 'Summerred') 
 
 SummerredSvelvik <- filter(Summerred, Region == 'Svelvik')
 SummerredUllensvang <- filter(Summerred, Region == 'Ullensvang')
 
 
-Discovery <- filter(SeedSet_stages, Apple_variety == 'Discovery') 
+Discovery <- filter(SeedSet_stages_Percentage, Apple_variety == 'Discovery') 
 DiscoverySvelvik <- filter(Discovery, Region == 'Svelvik')
 DiscoveryUllensvang <- filter (Discovery, Region == 'Ullensvang')
 
-Aroma <- filter (SeedSet_stages, Apple_variety == 'Aroma')
+Aroma <- filter (SeedSet_stages_Percentage, Apple_variety == 'Aroma')
 AromaSvelvik <- filter(Aroma, Region == 'Svelvik')
 AromaUllensvang <- filter (Aroma, Region == 'Ullensvang')
 
