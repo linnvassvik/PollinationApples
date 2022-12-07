@@ -1,17 +1,19 @@
 ### STATISTICAL ANALYSIS FOR SEED SET DATA ON APPLE POLLINATION ###
 
 library(lme4)
+library(patchwork)
 
 # import data
 source("R/1_Import_AppleQualityData.R")
 
 
+############# TEST ##############
 
 
-####### ANOVA?? ########
 
 
 
+##############################################################
 
 
 ##### GENERALIZED LINEAR MIXED EFFECT MODELS #####
