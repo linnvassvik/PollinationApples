@@ -1,7 +1,5 @@
 ###### APPLE QUALITY DATA FROM POLLINATION EXPERIMENT, HARDANGER AND SVELVIK ######
 
-library(viridis)
-library(RColorBrewer)
 library(ggpp)
 library(tidyverse)
 library(readxl)
@@ -22,7 +20,7 @@ AppleQualityData <- read_excel("Data/AQv2.xlsx")
 
 #Get number of seeds in new row
 SeedSet <- AppleQualityData %>%
-  pivot_longer(Seeds_fully_developet:Seeds_not_developed, names_to = "seed_stage")
+  pivot_longer(Seeds_fully_developed:Seeds_not_developed, names_to = "seed_stage")
 
 #Remove columns not needed for seed set analysis
 SeedSet <- SeedSet %>% 
@@ -60,7 +58,30 @@ Aroma <- filter (SeedSet_stages_Percentage, Apple_variety == 'Aroma')
 AromaSvelvik <- filter(Aroma, Region == 'Svelvik')
 AromaUllensvang <- filter (Aroma, Region == 'Ullensvang')
 
+###########################################################
 
+#Filtrate datasets on location for ANOVA analysis
+
+SummerredBerle <- filter(SeedSet, Location == 'Berle', Apple_variety == "Summerred")
+SummerredHoyen <- filter(Summerred, Location == 'Hoyen')
+SummerredSando <- filter(Summerred, Location == 'Sando')
+SummerredLofthus <- filter(Summerred, Location == 'Lofthus')
+SummerredUrheim <- filter(Summerred, Location == 'Urheim')
+SummerredDjonno <- filter(Summerred, Location == 'Djonno')
+
+DiscoveryBerle <- filter(Discovery, Location == 'Berle')
+DiscoveryHoyen <- filter(Discovery, Location == 'Hoyen')
+DiscoverySando <- filter(Discovery, Location == 'Sando')
+DiscoveryLofthus <- filter(Discovery, Location == 'Lofthus')
+DiscoveryUrheim <- filter(Discovery, Location == 'Urheim')
+DiscoveryDjonno <- filter(Discovery, Location == 'Djonno')
+
+AromaBerle <- filter(SeedSet, Apple_variety == "Aroma", Location == 'Berle')
+AromaHoyen <- filter(Aroma, Location == 'Hoyen')
+AromaSando <- filter(Aroma, Location == 'Sando')
+AromaLofthus <- filter(Aroma, Location == 'Lofthus')
+AromaUrheim <- filter(Aroma, Location == 'Urheim')
+AromaDjonno <- filter(Aroma, Location == 'Djonno')
 
 ######################################################################
 
@@ -68,8 +89,9 @@ AromaUllensvang <- filter (Aroma, Region == 'Ullensvang')
 ## PREPARING APPLE QUALITY DATA ##
 
 
-
-
+#Only use seeds fully developed
+AppleQuality <- AppleQualityData %>%
+  select(-c(Seeds_partially_developed, Seeds_not_developed)) 
 
 
 
