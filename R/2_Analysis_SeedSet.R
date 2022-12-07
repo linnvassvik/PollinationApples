@@ -9,9 +9,16 @@ source("R/1_Import_AppleQualityData.R")
 
 ############# TEST ##############
 
+ModelSeedSet0 <- glmer(Total_Seeds_Stage ~ 1 + (1 | Location), family = "poisson", data = SeedSet_stages)
+ModelSeedSet1 <- glmer(Total_Seeds_Stage ~ Treatment + (1 | Location), family = "poisson", data = SeedSet_stages)
+ModelSeedSet2 <- glmer(Total_Seeds_Stage ~ Apple_variety + (1 | Location), family = "poisson", data = SeedSet_stages)
+ModelSeedSet3 <- glmer(Total_Seeds_Stage ~ Treatment + Apple_variety + (1 | Location), family = "poisson", data = SeedSet_stages)
+ModelSeedSet4 <- glmer(Total_Seeds_Stage ~ Treatment * Apple_variety + (1 | Location), family = "poisson", data = SeedSet_stages)
 
+AIC(ModelSeedSet0, ModelSeedSet1, ModelSeedSet2, ModelSeedSet3, ModelSeedSet4)
 
-
+#Modell 4 har lavest AIC verdi
+summary(ModelSeedSet4)
 
 ##############################################################
 
