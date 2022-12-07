@@ -1,8 +1,8 @@
 ###### APPLE QUALITY DATA FROM POLLINATION EXPERIMENT, HARDANGER AND SVELVIK ######
 
-#library(viridis)
-#library(RColorBrewer)
-#library(ggpp)
+library(viridis)
+library(RColorBrewer)
+library(ggpp)
 library(tidyverse)
 library(readxl)
 
@@ -26,7 +26,8 @@ SeedSet <- AppleQualityData %>%
 
 #Remove columns not needed for seed set analysis
 SeedSet <- SeedSet %>% 
-  select(-c(Weight, Height, Diameter, Ratio, Shape, Damage))
+  select(-c(Weight, Height, Diameter, Ratio, Shape, Damage)) 
+
 
 # organize database to obtain three seed_stage for each treatment, and not per apple
 SeedSet_stages <- SeedSet %>% 
