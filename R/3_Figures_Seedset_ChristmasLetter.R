@@ -170,6 +170,7 @@ ggsave(AppleWeightSeeds_Location, filename = "Figures/Apple_Weight_Seeds_Locatio
 ## AROMA
 
 AppleWeightSeeds_Aroma <- AppleQualityAroma %>% 
+  mutate(across(Location, factor, levels=c("Berle","Høyen","Sando", "Lofthus", "Urheim", "Djønno"))) %>%
   ggplot(aes(y = Weight, x = Seeds_fully_developed, color = Treatment)) +
   geom_point(alpha = 0.3, position = position_jitter()) +
   labs(x = "Antall frø", y = "Vekt (g)", color = "Behandling", fill = "Behandling") +
@@ -178,7 +179,6 @@ AppleWeightSeeds_Aroma <- AppleQualityAroma %>%
   scale_color_manual (labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
   scale_fill_manual(labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
   ylim(0, 350) + #REMOVED TWO OUTLIERS
-  ggtitle("Korrelasjon mellom vekt og antall frø i Aroma") +
   theme(strip.background = element_blank(), text = element_text(size = 25, hjust = 0.5))+
   geom_hline(yintercept=97, linetype="dashed", color = "black", size=0.5) +
   geom_hline(yintercept=128, linetype="dashed", color = "black", size=0.5) + #line taken from internal apple quality measurement assesment
@@ -197,6 +197,7 @@ ggsave(AppleWeightSeeds_Aroma, filename = "Figures/Apple_Weight_Seeds_Aroma.jpeg
 ## DISCOVERY
 
 AppleWeightSeeds_Discovery <- AppleQualityDiscovery %>% 
+  mutate(across(Location, factor, levels=c("Berle","Høyen","Sando", "Lofthus", "Urheim", "Djønno"))) %>%
   ggplot(aes(y = Weight, x = Seeds_fully_developed, color = Treatment)) +
   geom_point(alpha = 0.3, position = position_jitter()) +
   labs(x = "Antall frø", y = "Vekt (g)", color = "Behandling", fill = "Behandling") +
@@ -205,7 +206,6 @@ AppleWeightSeeds_Discovery <- AppleQualityDiscovery %>%
   scale_color_manual (labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
   scale_fill_manual(labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
   ylim(0, 350) + #REMOVED TWO OUTLIERS
-  ggtitle("Korrelasjon mellom vekt og antall frø i Discovery") +
   theme(strip.background = element_blank(), text = element_text(size = 25, hjust = 0.5))+
   geom_hline(yintercept=95, linetype="dashed", color = "black", size=0.5) +
   geom_hline(yintercept=124, linetype="dashed", color = "black", size=0.5) + #line taken from internal apple quality measurement assesment
@@ -224,6 +224,7 @@ ggsave(AppleWeightSeeds_Discovery, filename = "Figures/Apple_Weight_Seeds_Discov
 ##SUMMERRED
 
 AppleWeightSeeds_Summerred <- AppleQualitySummerred %>% 
+  mutate(across(Location, factor, levels=c("Berle","Høyen","Sando", "Lofthus", "Urheim", "Djønno"))) %>%
   ggplot(aes(y = Weight, x = Seeds_fully_developed, color = Treatment)) +
   geom_point(alpha = 0.3, position = position_jitter()) +
   labs(x = "Antall frø", y = "Vekt (g)", color = "Behandling", fill = "Behandling") +
@@ -232,7 +233,6 @@ AppleWeightSeeds_Summerred <- AppleQualitySummerred %>%
   scale_color_manual (labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
   scale_fill_manual(labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
   ylim(0, 350) + #REMOVED TWO OUTLIERS
-  ggtitle("Korrelasjon mellom vekt og antall frø i Summerred") +
   theme(strip.background = element_blank(), text = element_text(size = 25, hjust = 0.5))+
   geom_hline(yintercept=100, linetype="dashed", color = "black", size=0.5) +
   geom_hline(yintercept=135, linetype="dashed", color = "black", size=0.5) + #line taken from internal apple quality measurement assesment
@@ -325,6 +325,7 @@ ggsave(AppleDiameterSeeds, filename = "Figures/Apple_Diameter_Seeds.jpeg", heigh
 ## AROMA ##
 
 AppleDiameterSeeds_Aroma <- AppleQualityAroma %>% 
+  mutate(across(Location, factor, levels=c("Berle","Høyen","Sando", "Lofthus", "Urheim", "Djønno"))) %>%
   ggplot(aes(y = Diameter, x = Seeds_fully_developed, color = Treatment)) +
   geom_point(alpha = 0.3, position = position_jitter()) +
   labs(x = "Antall frø", y = "Diameter (mm)", color = "Behandling", fill = "Behandling") +
@@ -333,7 +334,6 @@ AppleDiameterSeeds_Aroma <- AppleQualityAroma %>%
   scale_color_manual (labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
   scale_fill_manual(labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
   ylim(30, 110) + #REMOVED TWO OUTLIERS
-  ggtitle("Korrelasjon mellom diameter og antall frø i Aroma") +
   theme(plot.title = element_text(size = 18, hjust = 0.5)) +
   theme(strip.background = element_blank(), text = element_text(size = 25, hjust = 0.5))+
   geom_hline(yintercept=60, linetype="dashed", color = "black", size=0.5) +
@@ -352,6 +352,7 @@ ggsave(AppleDiameterSeeds_Aroma, filename = "Figures/Apple_Diameter_Seeds_Aroma.
 ## DISCOVERY ##
 
 AppleDiameterSeeds_Discovery <- AppleQualityDiscovery %>% 
+  mutate(across(Location, factor, levels=c("Berle","Høyen","Sando", "Lofthus", "Urheim", "Djønno"))) %>%
   ggplot(aes(y = Diameter, x = Seeds_fully_developed, color = Treatment)) +
   geom_point(alpha = 0.3, position = position_jitter()) +
   labs(x = "Antall frø", y = "Diameter (mm)", color = "Behandling", fill = "Behandling") +
@@ -360,7 +361,6 @@ AppleDiameterSeeds_Discovery <- AppleQualityDiscovery %>%
   scale_color_manual (labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
   scale_fill_manual(labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
   ylim(30, 110) + #REMOVED TWO OUTLIERS
-  ggtitle("Korrelasjon mellom diameter og antall frø i Discovery") +
   theme(plot.title = element_text(size = 18, hjust = 0.5)) +
   theme(strip.background = element_blank(), text = element_text(size = 25, hjust = 0.5))+
   geom_hline(yintercept=60, linetype="dashed", color = "black", size=0.5) +
@@ -379,6 +379,7 @@ ggsave(AppleDiameterSeeds_Discovery, filename = "Figures/Apple_Diameter_Seeds_Di
 ## SUMMERRED ##
 
 AppleDiameterSeeds_Summerred <- AppleQualitySummerred %>% 
+  mutate(across(Location, factor, levels=c("Berle","Høyen","Sando", "Lofthus", "Urheim", "Djønno"))) %>%
   ggplot(aes(y = Diameter, x = Seeds_fully_developed, color = Treatment)) +
   geom_point(alpha = 0.3, position = position_jitter()) +
   labs(x = "Antall frø", y = "Diameter (mm)", color = "Behandling", fill = "Behandling") +
@@ -387,7 +388,6 @@ AppleDiameterSeeds_Summerred <- AppleQualitySummerred %>%
   scale_color_manual (labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
   scale_fill_manual(labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
   ylim(30, 110) + #REMOVED TWO OUTLIERS
-  ggtitle("Korrelasjon mellom diameter og antall frø i Summerred") +
   theme(plot.title = element_text(size = 18, hjust = 0.5)) +
   theme(strip.background = element_blank(), text = element_text(size = 25, hjust = 0.5))+
   geom_hline(yintercept=60, linetype="dashed", color = "black", size=0.5) +

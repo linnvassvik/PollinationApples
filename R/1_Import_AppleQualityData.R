@@ -63,25 +63,25 @@ AromaUllensvang <- filter (Aroma, Region == 'Ullensvang')
 #Filtrate datasets on location for ANOVA analysis
 
 SummerredBerle <- filter(SeedSet, Location == 'Berle')
-SummerredHoyen <- filter(Summerred, Location == 'Hoyen')
+SummerredHøyen <- filter(Summerred, Location == 'Høyen')
 SummerredSando <- filter(Summerred, Location == 'Sando')
 SummerredLofthus <- filter(Summerred, Location == 'Lofthus')
 SummerredUrheim <- filter(Summerred, Location == 'Urheim')
-SummerredDjonno <- filter(Summerred, Location == 'Djonno')
+SummerredDjønno <- filter(Summerred, Location == 'Djønno')
 
 DiscoveryBerle <- filter(Discovery, Location == 'Berle')
 DiscoveryHoyen <- filter(Discovery, Location == 'Hoyen')
 DiscoverySando <- filter(Discovery, Location == 'Sando')
 DiscoveryLofthus <- filter(Discovery, Location == 'Lofthus')
 DiscoveryUrheim <- filter(Discovery, Location == 'Urheim')
-DiscoveryDjonno <- filter(Discovery, Location == 'Djonno')
+DiscoveryDjønno <- filter(Discovery, Location == 'Djønno')
 
 AromaBerle <- filter(SeedSet, Apple_variety == "Aroma", Location == 'Berle')
-AromaHoyen <- filter(Aroma, Location == 'Hoyen')
+AromaHøyen <- filter(Aroma, Location == 'Høyen')
 AromaSando <- filter(Aroma, Location == 'Sando')
 AromaLofthus <- filter(Aroma, Location == 'Lofthus')
 AromaUrheim <- filter(Aroma, Location == 'Urheim')
-AromaDjonno <- filter(Aroma, Location == 'Djonno')
+AromaDjønno <- filter(Aroma, Location == 'Djønno')
 
 
 ######################################################################
