@@ -62,7 +62,7 @@ AromaUllensvang <- filter (Aroma, Region == 'Ullensvang')
 
 #Filtrate datasets on location for ANOVA analysis
 
-SummerredBerle <- filter(SeedSet, Location == 'Berle', Apple_variety == "Summerred")
+SummerredBerle <- filter(SeedSet, Location == 'Berle')
 SummerredHoyen <- filter(Summerred, Location == 'Hoyen')
 SummerredSando <- filter(Summerred, Location == 'Sando')
 SummerredLofthus <- filter(Summerred, Location == 'Lofthus')
@@ -83,7 +83,10 @@ AromaLofthus <- filter(Aroma, Location == 'Lofthus')
 AromaUrheim <- filter(Aroma, Location == 'Urheim')
 AromaDjonno <- filter(Aroma, Location == 'Djonno')
 
+
 ######################################################################
+######################################################################
+#####################################################################
 
 
 ## PREPARING APPLE QUALITY DATA ##
@@ -93,7 +96,20 @@ AromaDjonno <- filter(Aroma, Location == 'Djonno')
 AppleQuality <- AppleQualityData %>%
   select(-c(Seeds_partially_developed, Seeds_not_developed)) 
 
+#For Aroma
 
+AppleQualityAroma <- AppleQuality %>% 
+  filter(Apple_variety == "Aroma")
+
+#For Discovery
+
+AppleQualityDiscovery <- AppleQuality %>% 
+  filter(Apple_variety == "Discovery")
+
+#For Summerred
+
+AppleQualitySummerred <- AppleQuality %>% 
+  filter(Apple_variety == "Summerred")
 
 ## PREPARING APPLE QUALITY DATA WITH EXTRA MEASUREMENTS ##
 
