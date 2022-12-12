@@ -113,6 +113,8 @@ ggsave(SummerredUllensvangPlot, filename = "Figures/Summerred_Ullensvang.jpeg", 
 ### HOW NUMBER OF SEEDS AFFECTS APPLE WEIGHT UNDER DIFFERENT TREATMENT AND COMBINED ###
 #Dashed line are lower priced apples, solid line are higher priced apples
 
+#SEPARATED BY TREATMENT
+
 AppleWeightSeeds <- AppleQuality %>% 
   ggplot(aes(y = Weight, x = Seeds_fully_developed, color = Treatment)) +
   geom_point(alpha = 0.3, position = position_jitter()) +
@@ -136,6 +138,8 @@ AppleWeightSeeds <- AppleQuality %>%
         axis.title = element_text (size = 18),
         plot.title = element_text (hjust = 0.5, size = 20, face = "bold"))
 ggsave(AppleWeightSeeds, filename = "Figures/Apple_Weight_Seeds.jpeg", height = 6, width = 8)
+
+#SEPARATED BY APPLE VARIETY
 
 AppleWeightSeeds_Location <- AppleQuality %>% 
   ggplot(aes(y = Weight, x = Seeds_fully_developed, color = Apple_variety)) +
@@ -161,6 +165,87 @@ AppleWeightSeeds_Location <- AppleQuality %>%
         axis.title = element_text (size = 18),
         plot.title = element_text (hjust = 0.5, size = 20, face = "bold"))
 ggsave(AppleWeightSeeds_Location, filename = "Figures/Apple_Weight_Seeds_Location.jpeg", height = 6, width = 8)
+
+
+## AROMA
+
+AppleWeightSeeds_Aroma <- AppleQualityAroma %>% 
+  ggplot(aes(y = Weight, x = Seeds_fully_developed, color = Treatment)) +
+  geom_point(alpha = 0.3, position = position_jitter()) +
+  labs(x = "Antall frø", y = "Vekt (g)", color = "Behandling", fill = "Behandling") +
+  geom_smooth(method = lm, fullrange=FALSE, aes(fill=Treatment)) + #remove line with se=FALSE, small dataset remove method=lm, 
+  theme_classic() +
+  scale_color_manual (labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
+  scale_fill_manual(labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
+  ylim(0, 350) + #REMOVED TWO OUTLIERS
+  ggtitle("Korrelasjon mellom vekt og antall frø i Aroma") +
+  theme(strip.background = element_blank(), text = element_text(size = 25, hjust = 0.5))+
+  geom_hline(yintercept=97, linetype="dashed", color = "black", size=0.5) +
+  geom_hline(yintercept=128, linetype="dashed", color = "black", size=0.5) + #line taken from internal apple quality measurement assesment
+  geom_hline(yintercept=142, linetype="solid", color = "black", size=0.5) +
+  geom_hline(yintercept=260, linetype="solid", color = "black", size=0.5) +
+  facet_wrap(~ Location) +
+  theme(legend.position = "bottom", 
+        legend.title = element_text(size = 15),
+        legend.text = element_text (size = 12),
+        axis.text = element_text (size = 18),
+        axis.title = element_text (size = 18),
+        plot.title = element_text (hjust = 0.5, size = 20, face = "bold"))
+ggsave(AppleWeightSeeds_Aroma, filename = "Figures/Apple_Weight_Seeds_Aroma.jpeg", height = 6, width = 8)
+
+
+## DISCOVERY
+
+AppleWeightSeeds_Discovery <- AppleQualityDiscovery %>% 
+  ggplot(aes(y = Weight, x = Seeds_fully_developed, color = Treatment)) +
+  geom_point(alpha = 0.3, position = position_jitter()) +
+  labs(x = "Antall frø", y = "Vekt (g)", color = "Behandling", fill = "Behandling") +
+  geom_smooth(method = lm, fullrange=FALSE, aes(fill=Treatment)) + #remove line with se=FALSE, small dataset remove method=lm, 
+  theme_classic() +
+  scale_color_manual (labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
+  scale_fill_manual(labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
+  ylim(0, 350) + #REMOVED TWO OUTLIERS
+  ggtitle("Korrelasjon mellom vekt og antall frø i Discovery") +
+  theme(strip.background = element_blank(), text = element_text(size = 25, hjust = 0.5))+
+  geom_hline(yintercept=95, linetype="dashed", color = "black", size=0.5) +
+  geom_hline(yintercept=124, linetype="dashed", color = "black", size=0.5) + #line taken from internal apple quality measurement assesment
+  geom_hline(yintercept=134, linetype="solid", color = "black", size=0.5) +
+  geom_hline(yintercept=275, linetype="solid", color = "black", size=0.5) +
+  facet_wrap(~ Location) +
+  theme(legend.position = "bottom", 
+        legend.title = element_text(size = 15),
+        legend.text = element_text (size = 12),
+        axis.text = element_text (size = 18),
+        axis.title = element_text (size = 18),
+        plot.title = element_text (hjust = 0.5, size = 20, face = "bold"))
+ggsave(AppleWeightSeeds_Discovery, filename = "Figures/Apple_Weight_Seeds_Discovery.jpeg", height = 6, width = 8)
+
+
+##SUMMERRED
+
+AppleWeightSeeds_Summerred <- AppleQualitySummerred %>% 
+  ggplot(aes(y = Weight, x = Seeds_fully_developed, color = Treatment)) +
+  geom_point(alpha = 0.3, position = position_jitter()) +
+  labs(x = "Antall frø", y = "Vekt (g)", color = "Behandling", fill = "Behandling") +
+  geom_smooth(method = lm, fullrange=FALSE, aes(fill=Treatment)) + #remove line with se=FALSE, small dataset remove method=lm, 
+  theme_classic() +
+  scale_color_manual (labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
+  scale_fill_manual(labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
+  ylim(0, 350) + #REMOVED TWO OUTLIERS
+  ggtitle("Korrelasjon mellom vekt og antall frø i Summerred") +
+  theme(strip.background = element_blank(), text = element_text(size = 25, hjust = 0.5))+
+  geom_hline(yintercept=100, linetype="dashed", color = "black", size=0.5) +
+  geom_hline(yintercept=135, linetype="dashed", color = "black", size=0.5) + #line taken from internal apple quality measurement assesment
+  geom_hline(yintercept=149, linetype="solid", color = "black", size=0.5) +
+  geom_hline(yintercept=275, linetype="solid", color = "black", size=0.5) +
+  facet_wrap(~ Location) +
+  theme(legend.position = "bottom", 
+        legend.title = element_text(size = 15),
+        legend.text = element_text (size = 12),
+        axis.text = element_text (size = 18),
+        axis.title = element_text (size = 18),
+        plot.title = element_text (hjust = 0.5, size = 20, face = "bold"))
+ggsave(AppleWeightSeeds_Summerred, filename = "Figures/Apple_Weight_Seeds_Summerred.jpeg", height = 6, width = 8)
 
 
 
@@ -237,17 +322,18 @@ AppleDiameterSeeds <- AppleQuality %>%
         plot.title = element_text (hjust = 0.5, size = 20, face = "bold"))
 ggsave(AppleDiameterSeeds, filename = "Figures/Apple_Diameter_Seeds.jpeg", height = 6, width = 8)
 
+## AROMA ##
 
-AppleDiameterSeeds_Location <-AppleQuality %>% 
-  ggplot(aes(y = Diameter, x = Seeds_fully_developed, color = Apple_variety)) +
+AppleDiameterSeeds_Aroma <- AppleQualityAroma %>% 
+  ggplot(aes(y = Diameter, x = Seeds_fully_developed, color = Treatment)) +
   geom_point(alpha = 0.3, position = position_jitter()) +
-  labs(x = "Antall frø", y = "Diameter (mm)", color = "Eplesort", fill = "Eplesort") +
-  geom_smooth(method = lm, fullrange=FALSE, aes(fill=Apple_variety)) + #remove line with se=FALSE, small dataset remove method=lm, 
+  labs(x = "Antall frø", y = "Diameter (mm)", color = "Behandling", fill = "Behandling") +
+  geom_smooth(method = lm, fullrange=FALSE, aes(fill=Treatment)) + #remove line with se=FALSE, small dataset remove method=lm, 
   theme_classic() +
-  scale_color_manual (values = c("#996600", "#336633", "#CC3300")) +
-  scale_fill_manual(values = c("#996600", "#336633", "#CC3300")) +
+  scale_color_manual (labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
+  scale_fill_manual(labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
   ylim(30, 110) + #REMOVED TWO OUTLIERS
-  ggtitle("Korrelasjon mellom diameter og antall frø") +
+  ggtitle("Korrelasjon mellom diameter og antall frø i Aroma") +
   theme(plot.title = element_text(size = 18, hjust = 0.5)) +
   theme(strip.background = element_blank(), text = element_text(size = 25, hjust = 0.5))+
   geom_hline(yintercept=60, linetype="dashed", color = "black", size=0.5) +
@@ -261,4 +347,58 @@ AppleDiameterSeeds_Location <-AppleQuality %>%
         axis.text = element_text (size = 18),
         axis.title = element_text (size = 18),
         plot.title = element_text (hjust = 0.5, size = 20, face = "bold"))
-ggsave(AppleDiameterSeeds_Location, filename = "Figures/Apple_Diameter_Seeds_Location.jpeg", height = 6, width = 8)
+ggsave(AppleDiameterSeeds_Aroma, filename = "Figures/Apple_Diameter_Seeds_Aroma.jpeg", height = 6, width = 8)
+
+## DISCOVERY ##
+
+AppleDiameterSeeds_Discovery <- AppleQualityDiscovery %>% 
+  ggplot(aes(y = Diameter, x = Seeds_fully_developed, color = Treatment)) +
+  geom_point(alpha = 0.3, position = position_jitter()) +
+  labs(x = "Antall frø", y = "Diameter (mm)", color = "Behandling", fill = "Behandling") +
+  geom_smooth(method = lm, fullrange=FALSE, aes(fill=Treatment)) + #remove line with se=FALSE, small dataset remove method=lm, 
+  theme_classic() +
+  scale_color_manual (labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
+  scale_fill_manual(labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
+  ylim(30, 110) + #REMOVED TWO OUTLIERS
+  ggtitle("Korrelasjon mellom diameter og antall frø i Discovery") +
+  theme(plot.title = element_text(size = 18, hjust = 0.5)) +
+  theme(strip.background = element_blank(), text = element_text(size = 25, hjust = 0.5))+
+  geom_hline(yintercept=60, linetype="dashed", color = "black", size=0.5) +
+  geom_hline(yintercept=68, linetype="dashed", color = "black", size=0.5) +#line taken from internal apple quality measurement assesment
+  geom_hline(yintercept=70, linetype="solid", color = "black", size=0.5) +
+  geom_hline(yintercept=90, linetype="solid", color = "black", size=0.5) +
+  facet_wrap(~ Location) +
+  theme(legend.position = "bottom", 
+        legend.title = element_text(size = 15),
+        legend.text = element_text (size = 12),
+        axis.text = element_text (size = 18),
+        axis.title = element_text (size = 18),
+        plot.title = element_text (hjust = 0.5, size = 20, face = "bold"))
+ggsave(AppleDiameterSeeds_Discovery, filename = "Figures/Apple_Diameter_Seeds_Discovery.jpeg", height = 6, width = 8)
+
+## SUMMERRED ##
+
+AppleDiameterSeeds_Summerred <- AppleQualitySummerred %>% 
+  ggplot(aes(y = Diameter, x = Seeds_fully_developed, color = Treatment)) +
+  geom_point(alpha = 0.3, position = position_jitter()) +
+  labs(x = "Antall frø", y = "Diameter (mm)", color = "Behandling", fill = "Behandling") +
+  geom_smooth(method = lm, fullrange=FALSE, aes(fill=Treatment)) + #remove line with se=FALSE, small dataset remove method=lm, 
+  theme_classic() +
+  scale_color_manual (labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
+  scale_fill_manual(labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
+  ylim(30, 110) + #REMOVED TWO OUTLIERS
+  ggtitle("Korrelasjon mellom diameter og antall frø i Summerred") +
+  theme(plot.title = element_text(size = 18, hjust = 0.5)) +
+  theme(strip.background = element_blank(), text = element_text(size = 25, hjust = 0.5))+
+  geom_hline(yintercept=60, linetype="dashed", color = "black", size=0.5) +
+  geom_hline(yintercept=69.5, linetype="dashed", color = "black", size=0.5) +#line taken from internal apple quality measurement assesment
+  geom_hline(yintercept=70, linetype="solid", color = "black", size=0.5) +
+  geom_hline(yintercept=90, linetype="solid", color = "black", size=0.5) +
+  facet_wrap(~ Location) +
+  theme(legend.position = "bottom", 
+        legend.title = element_text(size = 15),
+        legend.text = element_text (size = 12),
+        axis.text = element_text (size = 18),
+        axis.title = element_text (size = 18),
+        plot.title = element_text (hjust = 0.5, size = 20, face = "bold"))
+ggsave(AppleDiameterSeeds_Summerred, filename = "Figures/Apple_Diameter_Seeds_Summerred.jpeg", height = 6, width = 8)
