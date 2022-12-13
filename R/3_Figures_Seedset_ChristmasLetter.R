@@ -10,26 +10,20 @@ source("R/2_Analysis_SeedSet.R")
 
 #ALL APPLE VARIETIES PLOTTED TOGETHER
 
-ggplot(SeedSet_stages_Percentage, aes(x = Treatment, y = Total_Seeds_Stage, fill = seed_stage)) +
+SeedSetTreatment <- AppleQuality %>% 
+  mutate(across(Treatment, factor, levels=c("HP","N","C"))) %>%
+  ggplot(aes(x = Treatment, y = Seeds_fully_developed, fill = Treatment)) +
   geom_boxplot() +
   scale_x_discrete(limits = c("HP", "N", "C")) +
-  #facet_wrap(~ Location) + 
   theme(strip.background = element_blank()) +
-  scale_fill_manual(labels = c("Fully developed seeds", "No seeds", "Partially developed seeds"),values = c("#336633", "#CC3300", "#FF9900")) +
-  labs(y="Percentage", x="Treatment", fill="") +
+  scale_fill_manual(labels = c("Hand pollinated", "Naturally pollinated", "Pollinators excluded"),values = c("#336633", "#CC3300", "#FF9900")) +
+  labs(y="Number of seeds per apple", x="Treatment", fill="") +
   ggtitle("Seed set") +
-  theme(plot.title = element_text(size = 20, hjust = 0.5))
+  theme(plot.title = element_text(size = 20, hjust = 0.5)) +
+  #facet_wrap(~ Location) + 
+  facet_wrap(~ Apple_variety)
 
 
-ggplot(SeedSet_stages_Percentage, aes(x = Treatment, y = Percentage_Seeds_Stage, fill = seed_stage)) +
-  geom_boxplot() +
-  scale_x_discrete(limits = c("HP", "N", "C")) +
-  #facet_wrap(~ Location) + 
-  theme(strip.background = element_blank()) +
-  scale_fill_manual(labels = c("Fully developed seeds", "No seeds", "Partially developed seeds"),values = c("#336633", "#CC3300", "#FF9900")) +
-  labs(y="Percentage", x="Treatment", fill="") +
-  ggtitle("Seed set") +
-  theme(plot.title = element_text(size = 20, hjust = 0.5))
 
 
 
