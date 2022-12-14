@@ -23,63 +23,106 @@ SeedSetTreatment <- AppleQuality %>%
   #facet_wrap(~ Location) + 
   facet_wrap(~ Apple_variety)
 
+## PLOTS FOR SEEDSET 
 
 
+
+## EAST NORWAY
+SvelvikPlot <- Svelvik %>% 
+  filter(seed_stage == 'Seeds_fully_developed') %>% 
+  ggplot(aes(y=Percentage_Seeds_Stage, x=Treatment, fill = Treatment)) + 
+  stat_summary(fun = "mean", geom = "col") +
+  scale_y_continuous(expand = c(0, 0)) +
+  scale_x_discrete(limits = c("HP", "N")) +
+  facet_wrap(~ Apple_variety) + 
+  theme(strip.background = element_blank()) +
+  labs(y="Prosent fullt utviklede frø per eple", x="Behandling", fill="") +
+  scale_fill_manual(values = c("#336633", "#CC3300")) +
+  theme(legend.position = "bottom",
+        legend.text = element_text (size = 15),
+        axis.text = element_text (size = 18),
+        strip.text = element_text (size = 18),
+        axis.title = element_text (size = 18))
+ggsave(SvelvikPlot, filename = "Figures/Svelvik.jpeg", height = 6, width = 8)
+
+
+## WEST NORWAY
+
+UllensvangPlot <- Ullensvang %>% 
+  filter(seed_stage == 'Seeds_fully_developed') %>% 
+  ggplot(aes(y=Percentage_Seeds_Stage, x=Treatment, fill = Treatment)) + 
+  stat_summary(fun = "mean", geom = "col") +
+  scale_y_continuous(expand = c(0, 0)) +
+  scale_x_discrete(limits = c("HP", "N")) +
+  facet_wrap(~ Apple_variety) + 
+  theme(strip.background = element_blank()) +
+  labs(y="Prosent fullt utviklede frø per eple", x="Behandling", fill="") +
+  scale_fill_manual(values = c("#336633", "#CC3300")) +
+  theme(legend.position = "bottom",
+        legend.text = element_text (size = 15),
+        axis.text = element_text (size = 18),
+        strip.text = element_text (size = 18),
+        axis.title = element_text (size = 18)) 
+ggsave(UllensvangPlot, filename = "Figures/Ullensvang.jpeg", height = 6, width = 8)
 
 ### PLOTS FOR SEEDSET UNDER DIFFERENT TREATMENTS ###
 
 #AROMA
 AromaSvelvikPlot <- AromaSvelvik %>% 
-  mutate(across(seed_stage, factor, levels=c("Seeds_fully_developed", "Seeds_partially_developed", "Seeds_not_developed"))) %>% 
-  ggplot(aes(fill=seed_stage, y=Percentage_Seeds_Stage, x=Treatment)) + 
+  filter(Treatment != 'C') %>% 
+  filter(seed_stage == 'Seeds_fully_developed') %>% 
+  ggplot(aes(fill=Treatment, y=Percentage_Seeds_Stage, x=Treatment)) + 
   geom_col(position = position_stack(reverse = TRUE)) +
   scale_y_continuous(expand = c(0, 0)) +
-  scale_x_discrete(limits = c("HP", "N", "C")) +
+  scale_x_discrete(limits = c("HP", "N")) +
   facet_wrap(~ Location) + 
   theme(strip.background = element_blank()) +
-  scale_fill_manual(labels = c("Fullt utviklet frø", "Ingen frø", "Delvis utviklet frø"),values = c("#336633", "#FF9900", "#CC3300"), guide = guide_legend(reverse = TRUE)) +
-  labs(y="Prosent", x="Behandling", fill="") +
+  scale_fill_manual(values = c("#336633", "#CC3300"), guide = guide_legend(reverse = TRUE)) +
+  labs(y="Prosent fullt utviklede frø per eple", x="Behandling", fill="") +
   theme(text = element_text(size = 25, hjust = 0.5)) 
 ggsave(AromaSvelvikPlot, filename = "Figures/Aroma_Svelvik.jpeg", height = 6, width = 8)
 
 AromaUllensvangPlot <- AromaUllensvang %>% 
-  mutate(across(seed_stage, factor, levels=c("Seeds_fully_developed", "Seeds_partially_developed", "Seeds_not_developed"))) %>% 
-  ggplot(aes(fill=seed_stage, y=Percentage_Seeds_Stage, x=Treatment)) + 
+  filter(Treatment != 'C') %>% 
+  filter(seed_stage == 'Seeds_fully_developed') %>% 
+  ggplot(aes(fill=Treatment, y=Percentage_Seeds_Stage, x=Treatment)) + 
   geom_col(position = position_stack(reverse = TRUE)) +
   scale_y_continuous(expand = c(0, 0)) +
-  scale_x_discrete(limits = c("HP", "N", "C")) +
+  scale_x_discrete(limits = c("HP", "N")) +
   facet_wrap(~ Location) + 
   theme(strip.background = element_blank()) +
-  scale_fill_manual(labels = c("Fullt utviklet frø", "Ingen frø", "Delvis utviklet frø"),values = c("#336633", "#FF9900", "#CC3300"), guide = guide_legend(reverse = TRUE)) +
-  labs(y="Prosent", x="Behandling", fill="") +
+  scale_fill_manual(values = c("#336633", "#CC3300"), guide = guide_legend(reverse = TRUE)) +
+  labs(y="Prosent fullt utviklede frø per eple", x="Behandling", fill="") +
   theme(text = element_text(size = 25, hjust = 0.5)) 
 ggsave(AromaUllensvangPlot, filename = "Figures/Aroma_Ullensvang.jpeg", height = 6, width = 8)
 
 #DISCOVERY
 
 DiscoverySvelvikPlot <- DiscoverySvelvik %>% 
-  mutate(across(seed_stage, factor, levels=c("Seeds_fully_developed", "Seeds_partially_developed", "Seeds_not_developed"))) %>%
-  ggplot(aes(fill=seed_stage, y=Percentage_Seeds_Stage, x=Treatment)) + 
+  filter(Treatment != 'C') %>% 
+  filter(seed_stage == 'Seeds_fully_developed') %>% 
+  ggplot(aes(fill=Treatment, y=Percentage_Seeds_Stage, x=Treatment)) + 
   geom_col(position = position_stack(reverse = TRUE)) +
   scale_y_continuous(expand = c(0, 0)) +
-  scale_x_discrete(limits = c("HP", "N", "C")) +
+  scale_x_discrete(limits = c("HP", "N")) +
   facet_wrap(~ Location) + 
   theme(strip.background = element_blank()) +
-  scale_fill_manual(labels = c("Fullt utviklet frø", "Ingen frø", "Delvis utviklet frø"),values = c("#336633", "#FF9900", "#CC3300"), guide = guide_legend(reverse = TRUE)) +
-  labs(y="Prosent", x="Behandling", fill="") +
+  scale_fill_manual(values = c("#336633", "#CC3300"), guide = guide_legend(reverse = TRUE)) +
+  labs(y="Prosent fullt utviklede frø per eple", x="Behandling", fill="") +
   theme(text = element_text(size = 25, hjust = 0.5)) 
 ggsave(DiscoverySvelvikPlot, filename = "Figures/Discovery_Svelvik.jpeg", height = 6, width = 8)
 
 DiscoveryUllensvangPlot <- DiscoveryUllensvang %>% 
-  mutate(across(seed_stage, factor, levels=c("Seeds_fully_developed", "Seeds_partially_developed", "Seeds_not_developed"))) %>%
-  ggplot(aes(fill=seed_stage, y=Percentage_Seeds_Stage, x=Treatment)) + 
+  filter(Treatment != 'C') %>% 
+  filter(seed_stage == 'Seeds_fully_developed') %>% 
+  ggplot(aes(fill=Treatment, y=Percentage_Seeds_Stage, x=Treatment)) + 
   geom_col(position = position_stack(reverse = TRUE)) +
   scale_y_continuous(expand = c(0, 0)) +
-  scale_x_discrete(limits = c("HP", "N", "C")) +
+  scale_x_discrete(limits = c("HP", "N")) +
   facet_wrap(~ Location) + 
   theme(strip.background = element_blank()) +
-  scale_fill_manual(labels = c("Fullt utviklet frø", "Ingen frø", "Delvis utviklet frø"),values = c("#336633", "#FF9900", "#CC3300"), guide = guide_legend(reverse = TRUE)) +
-  labs(y="Prosent", x="Behandling", fill="") +
+  scale_fill_manual(values = c("#336633", "#CC3300"), guide = guide_legend(reverse = TRUE)) +
+  labs(y="Prosent fullt utviklede frø per eple", x="Behandling", fill="") +
   theme(text = element_text(size = 25, hjust = 0.5)) 
 ggsave(DiscoveryUllensvangPlot, filename = "Figures/Discovery_Ullensvang.jpeg", height = 6, width = 8)
 
@@ -87,28 +130,30 @@ ggsave(DiscoveryUllensvangPlot, filename = "Figures/Discovery_Ullensvang.jpeg", 
 #Summerred
 
 SummerredSvelvikPlot <- SummerredSvelvik %>% 
-  mutate(across(seed_stage, factor, levels=c("Seeds_fully_developed", "Seeds_partially_developed", "Seeds_not_developed"))) %>%
-  ggplot(aes(fill=seed_stage, y=Percentage_Seeds_Stage, x=Treatment)) + 
+  filter(Treatment != 'C') %>% 
+  filter(seed_stage == 'Seeds_fully_developed') %>% 
+  ggplot(aes(fill=Treatment, y=Percentage_Seeds_Stage, x=Treatment)) + 
   geom_col(position = position_stack(reverse = TRUE)) +
   scale_y_continuous(expand = c(0, 0)) +
-  scale_x_discrete(limits = c("HP", "N", "C")) +
+  scale_x_discrete(limits = c("HP", "N")) +
   facet_wrap(~ Location) + 
   theme(strip.background = element_blank()) +
-  scale_fill_manual(labels = c("Fullt utviklet frø", "Ingen frø", "Delvis utviklet frø"),values = c("#336633", "#FF9900", "#CC3300"), guide = guide_legend(reverse = TRUE)) +
-  labs(y="Prosent", x="Behandling", fill="") +
+  scale_fill_manual(values = c("#336633", "#CC3300"), guide = guide_legend(reverse = TRUE)) +
+  labs(y="Prosent fullt utviklede frø per eple", x="Behandling", fill="") +
   theme(text = element_text(size = 25, hjust = 0.5)) 
 ggsave(SummerredSvelvikPlot, filename = "Figures/Summerred_Svelvik.jpeg", height = 6, width = 8)
 
 SummerredUllensvangPlot <- SummerredUllensvang %>%  
-  mutate(across(seed_stage, factor, levels=c("Seeds_fully_developed", "Seeds_partially_developed", "Seeds_not_developed"))) %>%
-  ggplot(aes(fill=seed_stage, y=Percentage_Seeds_Stage, x=Treatment)) + 
+  filter(Treatment != 'C') %>% 
+  filter(seed_stage == 'Seeds_fully_developed') %>% 
+  ggplot(aes(fill=Treatment, y=Percentage_Seeds_Stage, x=Treatment)) + 
   geom_col(position = position_stack(reverse = TRUE)) +
   scale_y_continuous(expand = c(0, 0)) +
-  scale_x_discrete(limits = c("HP", "N", "C")) +
+  scale_x_discrete(limits = c("HP", "N")) +
   facet_wrap(~ Location) + 
   theme(strip.background = element_blank()) +
-  scale_fill_manual(labels = c("Fullt utviklet frø", "Ingen frø", "Delvis utviklet frø"),values = c("#336633", "#FF9900", "#CC3300"), guide = guide_legend(reverse = TRUE)) +
-  labs(y="Prosent", x="Behandling", fill="") +
+  scale_fill_manual(values = c("#336633", "#CC3300"), guide = guide_legend(reverse = TRUE)) +
+  labs(y="Prosent fullt utviklede frø per eple", x="Behandling", fill="") +
   theme(text = element_text(size = 25, hjust = 0.5)) 
 ggsave(SummerredUllensvangPlot, filename = "Figures/Summerred_Ullensvang.jpeg", height = 6, width = 8)
 
