@@ -26,52 +26,59 @@ SeedSetTreatment <- AppleQuality %>%
 
 
 
-
 ### PLOTS FOR SEEDSET UNDER DIFFERENT TREATMENTS ###
 
 #AROMA
-AromaSvelvikPlot <- ggplot(AromaSvelvik, aes(fill=seed_stage, y=Percentage_Seeds_Stage, x=Treatment)) + 
+AromaSvelvikPlot <- AromaSvelvik %>% 
+  mutate(across(seed_stage, factor, levels=c("Seeds_fully_developed", "Seeds_partially_developed", "Seeds_not_developed"))) %>% 
+  ggplot(aes(fill=seed_stage, y=Percentage_Seeds_Stage, x=Treatment)) + 
   geom_col(position = position_stack(reverse = TRUE)) +
   scale_y_continuous(expand = c(0, 0)) +
   scale_x_discrete(limits = c("HP", "N", "C")) +
   facet_wrap(~ Location) + 
   theme(strip.background = element_blank()) +
-  scale_fill_manual(labels = c("Fullt utviklet frø", "Ingen frø", "Delvis utviklet frø"),values = c("#336633", "#CC3300", "#FF9900")) +
+  scale_fill_manual(labels = c("Fullt utviklet frø", "Ingen frø", "Delvis utviklet frø"),values = c("#336633", "#FF9900", "#CC3300"), guide = guide_legend(reverse = TRUE)) +
   labs(y="Prosent", x="Behandling", fill="") +
   theme(text = element_text(size = 25, hjust = 0.5)) 
 ggsave(AromaSvelvikPlot, filename = "Figures/Aroma_Svelvik.jpeg", height = 6, width = 8)
 
-AromaUllensvangPlot <- ggplot(AromaUllensvang, aes(fill=seed_stage, y=Percentage_Seeds_Stage, x=Treatment)) + 
+AromaUllensvangPlot <- AromaUllensvang %>% 
+  mutate(across(seed_stage, factor, levels=c("Seeds_fully_developed", "Seeds_partially_developed", "Seeds_not_developed"))) %>% 
+  ggplot(aes(fill=seed_stage, y=Percentage_Seeds_Stage, x=Treatment)) + 
   geom_col(position = position_stack(reverse = TRUE)) +
   scale_y_continuous(expand = c(0, 0)) +
   scale_x_discrete(limits = c("HP", "N", "C")) +
   facet_wrap(~ Location) + 
   theme(strip.background = element_blank()) +
-  scale_fill_manual(labels = c("Fullt utviklet frø", "Ingen frø", "Delvis utviklet frø"),values = c("#336633", "#CC3300", "#FF9900")) +
+  scale_fill_manual(labels = c("Fullt utviklet frø", "Ingen frø", "Delvis utviklet frø"),values = c("#336633", "#FF9900", "#CC3300"), guide = guide_legend(reverse = TRUE)) +
   labs(y="Prosent", x="Behandling", fill="") +
   theme(text = element_text(size = 25, hjust = 0.5)) 
 ggsave(AromaUllensvangPlot, filename = "Figures/Aroma_Ullensvang.jpeg", height = 6, width = 8)
 
 #DISCOVERY
 
-DiscoverySvelvikPlot <- ggplot(DiscoverySvelvik, aes(fill=seed_stage, y=Percentage_Seeds_Stage, x=Treatment)) + 
+DiscoverySvelvikPlot <- DiscoverySvelvik %>% 
+  mutate(across(seed_stage, factor, levels=c("Seeds_fully_developed", "Seeds_partially_developed", "Seeds_not_developed"))) %>%
+  ggplot(aes(fill=seed_stage, y=Percentage_Seeds_Stage, x=Treatment)) + 
   geom_col(position = position_stack(reverse = TRUE)) +
   scale_y_continuous(expand = c(0, 0)) +
   scale_x_discrete(limits = c("HP", "N", "C")) +
   facet_wrap(~ Location) + 
   theme(strip.background = element_blank()) +
-  scale_fill_manual(labels = c("Fullt utviklet frø", "Ingen frø", "Delvis utviklet frø"),values = c("#336633", "#CC3300", "#FF9900")) +
+  scale_fill_manual(labels = c("Fullt utviklet frø", "Ingen frø", "Delvis utviklet frø"),values = c("#336633", "#FF9900", "#CC3300"), guide = guide_legend(reverse = TRUE)) +
   labs(y="Prosent", x="Behandling", fill="") +
   theme(text = element_text(size = 25, hjust = 0.5)) 
 ggsave(DiscoverySvelvikPlot, filename = "Figures/Discovery_Svelvik.jpeg", height = 6, width = 8)
 
-DiscoveryUllensvangPlot <- ggplot(DiscoveryUllensvang, aes(fill=seed_stage, y=Percentage_Seeds_Stage, x=Treatment)) + 
+DiscoveryUllensvangPlot <- DiscoveryUllensvang %>% 
+  mutate(across(seed_stage, factor, levels=c("Seeds_fully_developed", "Seeds_partially_developed", "Seeds_not_developed"))) %>%
+  ggplot(aes(fill=seed_stage, y=Percentage_Seeds_Stage, x=Treatment)) + 
   geom_col(position = position_stack(reverse = TRUE)) +
   scale_y_continuous(expand = c(0, 0)) +
   scale_x_discrete(limits = c("HP", "N", "C")) +
   facet_wrap(~ Location) + 
   theme(strip.background = element_blank()) +
-  scale_fill_manual(labels = c("Fullt utviklet frø", "Ingen frø", "Delvis utviklet frø"),values = c("#336633", "#CC3300", "#FF9900")) +
+  scale_fill_manual(labels = c("Fullt utviklet frø", "Ingen frø", "Delvis utviklet frø"),values = c("#336633", "#FF9900", "#CC3300"), guide = guide_legend(reverse = TRUE)) +
   labs(y="Prosent", x="Behandling", fill="") +
   theme(text = element_text(size = 25, hjust = 0.5)) 
 ggsave(DiscoveryUllensvangPlot, filename = "Figures/Discovery_Ullensvang.jpeg", height = 6, width = 8)
@@ -79,24 +86,28 @@ ggsave(DiscoveryUllensvangPlot, filename = "Figures/Discovery_Ullensvang.jpeg", 
 
 #Summerred
 
-SummerredSvelvikPlot <- ggplot(SummerredSvelvik, aes(fill=seed_stage, y=Percentage_Seeds_Stage, x=Treatment)) + 
+SummerredSvelvikPlot <- SummerredSvelvik %>% 
+  mutate(across(seed_stage, factor, levels=c("Seeds_fully_developed", "Seeds_partially_developed", "Seeds_not_developed"))) %>%
+  ggplot(aes(fill=seed_stage, y=Percentage_Seeds_Stage, x=Treatment)) + 
   geom_col(position = position_stack(reverse = TRUE)) +
   scale_y_continuous(expand = c(0, 0)) +
   scale_x_discrete(limits = c("HP", "N", "C")) +
   facet_wrap(~ Location) + 
   theme(strip.background = element_blank()) +
-  scale_fill_manual(labels = c("Fullt utviklet frø", "Ingen frø", "Delvis utviklet frø"),values = c("#336633", "#CC3300", "#FF9900")) +
+  scale_fill_manual(labels = c("Fullt utviklet frø", "Ingen frø", "Delvis utviklet frø"),values = c("#336633", "#FF9900", "#CC3300"), guide = guide_legend(reverse = TRUE)) +
   labs(y="Prosent", x="Behandling", fill="") +
   theme(text = element_text(size = 25, hjust = 0.5)) 
 ggsave(SummerredSvelvikPlot, filename = "Figures/Summerred_Svelvik.jpeg", height = 6, width = 8)
 
-SummerredUllensvangPlot <- ggplot(SummerredUllensvang, aes(fill=seed_stage, y=Percentage_Seeds_Stage, x=Treatment)) + 
+SummerredUllensvangPlot <- SummerredUllensvang %>%  
+  mutate(across(seed_stage, factor, levels=c("Seeds_fully_developed", "Seeds_partially_developed", "Seeds_not_developed"))) %>%
+  ggplot(aes(fill=seed_stage, y=Percentage_Seeds_Stage, x=Treatment)) + 
   geom_col(position = position_stack(reverse = TRUE)) +
   scale_y_continuous(expand = c(0, 0)) +
   scale_x_discrete(limits = c("HP", "N", "C")) +
   facet_wrap(~ Location) + 
   theme(strip.background = element_blank()) +
-  scale_fill_manual(labels = c("Fullt utviklet frø", "Ingen frø", "Delvis utviklet frø"),values = c("#336633", "#CC3300", "#FF9900")) +
+  scale_fill_manual(labels = c("Fullt utviklet frø", "Ingen frø", "Delvis utviklet frø"),values = c("#336633", "#FF9900", "#CC3300"), guide = guide_legend(reverse = TRUE)) +
   labs(y="Prosent", x="Behandling", fill="") +
   theme(text = element_text(size = 25, hjust = 0.5)) 
 ggsave(SummerredUllensvangPlot, filename = "Figures/Summerred_Ullensvang.jpeg", height = 6, width = 8)
@@ -110,21 +121,21 @@ ggsave(SummerredUllensvangPlot, filename = "Figures/Summerred_Ullensvang.jpeg", 
 #SEPARATED BY TREATMENT
 
 AppleWeightSeeds <- AppleQuality %>% 
+  mutate(across(Location, factor, levels = c ("Berle", "Høyen", "Sando", "Lofthus", "Urheim", "Djønno"))) %>% 
   ggplot(aes(y = Weight, x = Seeds_fully_developed, color = Treatment)) +
-  geom_point(alpha = 0.3, position = position_jitter()) +
-  labs(x = "Antall frø", y = "Vekt (g)", color = "Behandling", fill = "Behandling") +
-  geom_smooth(method = lm, fullrange=FALSE, aes(fill=Treatment)) + #remove line with se=FALSE, small dataset remove method=lm, 
+  geom_smooth(method = lm, fullrange=FALSE, aes(fill=Treatment)) + 
+  labs(x = "Antall frø per eple", y = "Vekt (g)", color = "Behandling", fill = "Behandling") +
   theme_classic() +
   scale_color_manual (labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
   scale_fill_manual(labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
-  ylim(0, 350) + #REMOVED TWO OUTLIERS
+  ylim(50, 300) + #REMOVED TWO OUTLIERS
   ggtitle("Korrelasjon mellom vekt og antall frø") +
   theme(strip.background = element_blank(), text = element_text(size = 25, hjust = 0.5))+
   geom_hline(yintercept=95, linetype="dashed", color = "black", size=0.5) +
   geom_hline(yintercept=135.5, linetype="dashed", color = "black", size=0.5) + #line taken from internal apple quality measurement assesment
   geom_hline(yintercept=134, linetype="solid", color = "black", size=0.5) +
   geom_hline(yintercept=275, linetype="solid", color = "black", size=0.5) +
-  facet_wrap(~ Apple_variety) +
+  facet_wrap(~ Location) +
   theme(legend.position = "bottom", 
         legend.title = element_text(size = 15),
         legend.text = element_text (size = 12),
@@ -137,9 +148,8 @@ ggsave(AppleWeightSeeds, filename = "Figures/Apple_Weight_Seeds.jpeg", height = 
 
 AppleWeightSeeds_Location <- AppleQuality %>% 
   ggplot(aes(y = Weight, x = Seeds_fully_developed, color = Apple_variety)) +
-  geom_point(alpha = 0.3, position = position_jitter()) +
+  geom_smooth(method = lm, fullrange=FALSE, aes(fill=Apple_variety)) + 
   labs(x = "Antall frø", y = "Vekt (g)", color = "Eplesort", fill = "Eplesort") +
-  geom_smooth(method = lm, fullrange=FALSE, aes(fill=Apple_variety)) + #remove line with se=FALSE, small dataset remove method=lm, 
   theme_classic() +
   scale_color_manual (values = c("#996600", "#336633", "#CC3300")) +
   scale_fill_manual(values = c("#996600", "#336633", "#CC3300")) +
@@ -292,14 +302,14 @@ ggsave(AppleHeightSeeds, filename = "Figures/Apple_Height_Seeds.jpeg", height = 
 #Dashed line are lower priced apples, solid line are higher priced apples
 
 AppleDiameterSeeds <- AppleQuality %>% 
+  mutate(across(Location, factor, levels = c ("Berle", "Høyen", "Sando", "Lofthus", "Urheim", "Djønno"))) %>% 
   ggplot(aes(y = Diameter, x = Seeds_fully_developed, color = Treatment)) +
-  geom_point(alpha = 0.3, position = position_jitter()) +
-  labs(x = "Antall frø", y = "Diameter (mm)", color = "Behandling", fill = "Behandling") +
-  geom_smooth(method = lm, fullrange=FALSE, aes(fill=Treatment)) + #remove line with se=FALSE, small dataset remove method=lm, 
+  geom_smooth(method = lm, fullrange=FALSE, aes(fill=Treatment)) +
+  labs(x = "Antall frø per eple", y = "Diameter (mm)", color = "Behandling", fill = "Behandling") +
   theme_classic() +
   scale_color_manual (labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
   scale_fill_manual(labels = c("Pollinatorer ekskludert (C)", "Håndpollinert (HP)", "Naturlig pollinert (N)"), values = c("#996600", "#336633", "#CC3300")) +
-  ylim(30, 110) + #REMOVED TWO OUTLIERS
+  ylim(50, 95) + #REMOVED TWO OUTLIERS
   ggtitle("Korrelasjon mellom diameter og antall frø") +
   theme(plot.title = element_text(size = 18, hjust = 0.5)) +
   theme(strip.background = element_blank(), text = element_text(size = 25, hjust = 0.5))+
@@ -307,7 +317,7 @@ AppleDiameterSeeds <- AppleQuality %>%
   geom_hline(yintercept=69.5, linetype="dashed", color = "black", size=0.5) +#line taken from internal apple quality measurement assesment
   geom_hline(yintercept=70, linetype="solid", color = "black", size=0.5) +
   geom_hline(yintercept=90, linetype="solid", color = "black", size=0.5) +
-  facet_wrap(~ Apple_variety) +
+  facet_wrap(~ Location) +
   theme(legend.position = "bottom", 
         legend.title = element_text(size = 15),
         legend.text = element_text (size = 12),
