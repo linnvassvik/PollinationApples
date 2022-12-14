@@ -43,6 +43,20 @@ SeedSet_stages_Percentage <- SeedSet_stages %>%
   rename(Percentage_Seeds_Stage = percentage)
 
 
+
+#################################################################
+
+
+
+#Separate Seed Set measurements based on region and remove treatment where pollinators where excluded
+Svelvik <- SeedSet_stages_Percentage %>% 
+  filter(Region == 'Svelvik') %>% 
+  filter(Treatment != 'C')
+
+Ullensvang <- SeedSet_stages_Percentage %>% 
+  filter(Region == 'Ullensvang') %>% 
+  filter(Treatment != 'C')
+
 #Separate Seed Set measurements based on apple variety and region
 Summerred <- filter(SeedSet_stages_Percentage, Apple_variety == 'Summerred') 
 
@@ -59,34 +73,6 @@ AromaSvelvik <- filter(Aroma, Region == 'Svelvik')
 AromaUllensvang <- filter (Aroma, Region == 'Ullensvang')
 
 ###########################################################
-
-#Filtrate datasets on location for ANOVA analysis
-
-SummerredBerle <- filter(SeedSet, Location == 'Berle')
-SummerredHøyen <- filter(Summerred, Location == 'Høyen')
-SummerredSando <- filter(Summerred, Location == 'Sando')
-SummerredLofthus <- filter(Summerred, Location == 'Lofthus')
-SummerredUrheim <- filter(Summerred, Location == 'Urheim')
-SummerredDjønno <- filter(Summerred, Location == 'Djønno')
-
-DiscoveryBerle <- filter(Discovery, Location == 'Berle')
-DiscoveryHoyen <- filter(Discovery, Location == 'Hoyen')
-DiscoverySando <- filter(Discovery, Location == 'Sando')
-DiscoveryLofthus <- filter(Discovery, Location == 'Lofthus')
-DiscoveryUrheim <- filter(Discovery, Location == 'Urheim')
-DiscoveryDjønno <- filter(Discovery, Location == 'Djønno')
-
-AromaBerle <- filter(SeedSet, Apple_variety == "Aroma", Location == 'Berle')
-AromaHøyen <- filter(Aroma, Location == 'Høyen')
-AromaSando <- filter(Aroma, Location == 'Sando')
-AromaLofthus <- filter(Aroma, Location == 'Lofthus')
-AromaUrheim <- filter(Aroma, Location == 'Urheim')
-AromaDjønno <- filter(Aroma, Location == 'Djønno')
-
-
-######################################################################
-######################################################################
-#####################################################################
 
 
 ## PREPARING APPLE QUALITY DATA ##
