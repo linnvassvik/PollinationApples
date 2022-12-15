@@ -5,7 +5,7 @@ library(tidyverse)
 library(readxl)
 
 
-pn <- . %>% print(n = Inf) #allows you to see infinite rows
+#pn <- . %>% print(n = Inf) #allows you to see infinite rows
 
 #Import data on effects of pollination on apple quality under three different 
 #treatments: supplemental pollination, natural pollination, pollinators excluded
@@ -45,6 +45,17 @@ SeedSet_stages_Percentage <- SeedSet_stages %>%
 
 
 #################################################################
+
+## DATASET WITH ONLY TREATMENT, SEED NUMBER AND ID
+SeedSetID <- AppleQualityData %>% 
+  select(-c(Seeds_partially_developed, Seeds_not_developed)) %>% 
+  select(-c(Tree, Weight, Height, Diameter, Ratio, Shape, Damage))
+
+
+SeedSetID <- SeedSetID %>% 
+  pivot_wider(names_from = Treatment, values_from = Seeds_fully_developed)
+
+
 
 
 

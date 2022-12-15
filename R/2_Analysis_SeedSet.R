@@ -6,6 +6,15 @@ library(patchwork)
 # import data
 source("R/1_Import_AppleQualityData.R")
 
+##### WILCOXON TEST #####
+
+shapiro.test(AppleQualityAroma$Seeds_fully_developed)
+shapiro.test(AppleQualityDiscovery$Seeds_fully_developed)
+shapiro.test(AppleQualitySummerred$Seeds_fully_developed)
+
+#All values are significant, therefore wilcoxon test:
+
+wilcox.test()
 
 ############# TEST ##############
 
