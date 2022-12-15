@@ -1,0 +1,7 @@
+### POLLINATORS CAUGHT IN PAN AND VANE TRAPS INSIDE AND OUTSIDE APPLE ORCHARDS IN EAST NORWAY ###
+
+library(ggpp)
+library(tidyverse)
+library(readxl)
+
+##IMPORT DATASET
