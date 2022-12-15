@@ -9,16 +9,21 @@ library(readxl)
 BeesWest <- read_excel("Data/Bees_Vestlandet_SiljeOgSara.xlsx")
 BeesEast <- read_excel("Data/Bees_Østlandet_Jane.xlsx")
 
+BeesEastEnglish <- read_excel("Data/Bees_Østlandet_Jane_english.xlsx")
+
 
 ## PIVOT BEESEAST
 BeesEast <- BeesEast %>% 
   pivot_longer(Blomsterflue:Villbie, names_to = "Norsk_gruppe")
 
+BeesEastEnglish <- BeesEastEnglish %>% 
+  pivot_longer(Hoverfly:'Wild bee', names_to = "English_group")
+
 ##PLOTS
 
-PollinatorsWest <- BeesWest %>% 
-  mutate(across(Norsk_gruppe, factor, levels=c("Honningbie","Humle","Villbie", "Blomsterflue"))) %>%
-  ggplot(aes(x = Norsk_gruppe, y = after_stat(count), fill = Norsk_gruppe)) +
+PollinatorsWestEng <- BeesWest %>% 
+  mutate(across(English_gruppe, factor, levels=c("Honeybee","Bumble bee","Wild bee", "Hoverfly"))) %>%
+  ggplot(aes(x = English_gruppe, y = after_stat(count), fill = English_gruppe)) +
   geom_bar() +
   facet_wrap(~ Location) +
   theme(strip.background = element_blank()) +
@@ -30,15 +35,15 @@ PollinatorsWest <- BeesWest %>%
         strip.text = element_text (size = 18),
         legend.position = "none",
         plot.title = element_text (hjust = 0.5, size = 20, face = "bold")) +
-  labs(y="Antall", x="", fill="Pollinatorer") +
+  labs(y="Number of pollinators", x="", fill="Pollinators") +
   scale_fill_manual(values = c("#006600", "#669966", "#993333", "#CC6666")) +
   ggtitle("Antall pollinatorer på Vestlandet")
-ggsave(PollinatorsWest, filename = "Figures/Pollinators_WestNorway.jpeg", height = 6, width = 8)
+ggsave(PollinatorsWestEng, filename = "Figures/Pollinators_WestNorway_Eng.jpeg", height = 6, width = 8)
 
 
-PollinatorsEast <- BeesEast %>% 
-  mutate(across(Norsk_gruppe, factor, levels=c("Honningbie","Humle","Villbie", "Blomsterflue"))) %>%
-  ggplot(aes(x = Norsk_gruppe, y = value, fill = Norsk_gruppe)) +
+PollinatorsEastEnglish <- BeesEastEnglish %>% 
+  mutate(across(English_group, factor, levels=c("Honeybee","Bumble bee","Wild bee", "Hoverfly"))) %>%
+  ggplot(aes(x = English_group, y = value, fill = English_group)) +
   geom_col() +
   facet_wrap(~ Location) +
   theme(strip.background = element_blank()) +
@@ -50,8 +55,8 @@ PollinatorsEast <- BeesEast %>%
         strip.text = element_text (size = 18),
         legend.position = "none",
         plot.title = element_text (hjust = 0.5, size = 20, face = "bold")) +
-  labs(y="Antall", x="", fill="Pollinatorer") +
+  labs(y="Number of pollinators", x="", fill="Pollinators") +
   scale_fill_manual(values = c("#006600", "#669966", "#993333", "#CC6666")) +
   ggtitle("Antall pollinatorer på Østlandet")
-ggsave(PollinatorsEast, filename = "Figures/Pollinators_EastNorway.jpeg", height = 6, width = 8)
+ggsave(PollinatorsEastEnglish, filename = "Figures/Pollinators_East_English.jpeg", height = 6, width = 8)
 
