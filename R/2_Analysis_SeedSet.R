@@ -6,15 +6,42 @@ library(patchwork)
 # import data
 source("R/1_Import_AppleQualityData.R")
 
-##### WILCOXON TEST #####
+##### Mann-Whitney U test #####
 
-shapiro.test(AppleQualityAroma$Seeds_fully_developed)
-shapiro.test(AppleQualityDiscovery$Seeds_fully_developed)
-shapiro.test(AppleQualitySummerred$Seeds_fully_developed)
+#All apple varieties combined
+hist(log(SeedSet_average$Average_seeds)) #non-normal distributen on plot
 
-#All values are significant, therefore wilcoxon test:
 
-wilcox.test()
+shapiro.test(SeedSet_average$Average_seeds)
+
+#Split by the three different apple varieties
+shapiro.test(SeedSet_average$Average_seeds)
+
+#All values are significant, meaning they are not normally distributed
+#data is also not paired, therefore using Mann-Whitney U test:
+
+ggplot(SeedSet_average, aes(x = Treatment, y = Average_seeds, color = Treatment)) +
+  geom_boxplot() + 
+  theme_bw() +
+  facet_wrap(~Apple_variety)
+#Plot: does not look like there is a difference between HP and N, but they are different from C
+
+SeedSet_average_HPN <- SeedSet_average %>% 
+  filter(Treatment != 'C')
+
+WilcoxonTestAllVarieties <- wilcox.test(log(Average_seeds) ~ Treatment, data = SeedSet_average_HPN, 
+                                        paired = FALSE)
+WilcoxonTestAllVarieties
+## DOESNT WORK
+
+
+
+
+
+
+
+
+
 
 ############# TEST ##############
 
