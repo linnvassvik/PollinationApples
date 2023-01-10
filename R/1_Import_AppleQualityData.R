@@ -38,7 +38,7 @@ SeedSet_stages <- SeedSet %>%
   rename(Total_Seeds_Treatment = tot2)
 
 # Calculate percentage of each seed stage for each treatment  
-SeedSet_stages_Percentage <- SeedSet_stages %>% 
+SeedSet_Percentage <- SeedSet_stages %>% 
   mutate(Percentage_Seeds_Stage = (Total_Seeds_Stage/Total_Seeds_Treatment)*100)
 
 # Calculate mean of seeds per tree and treatment
@@ -55,7 +55,10 @@ SeedSet_average <- AppleQualityData %>%
   select(-c(Seeds_fully_developed))
 
 
-
+SeedSet_developed <- AppleQualityData %>% 
+  select(-c(Weight, Height, Diameter, Ratio, Shape, Damage, Seeds_partially_developed, Seeds_not_developed)) %>% 
+  group_by(Apple_variety, Region, Location, Treatment, Tree) %>% 
+  ungroup()
 
 #################################################################
 
@@ -73,26 +76,26 @@ SeedSetID <- AppleQualityData %>%
 
 
 #Separate Seed Set measurements based on region and remove treatment where pollinators where excluded
-Svelvik <- SeedSet_stages_Percentage %>% 
+Svelvik <- SeedSet_developed %>% 
   filter(Region == 'Svelvik') %>% 
   filter(Treatment != 'C')
 
-Ullensvang <- SeedSet_stages_Percentage %>% 
+Ullensvang <- SeedSet_developed %>% 
   filter(Region == 'Ullensvang') %>% 
   filter(Treatment != 'C')
 
 #Separate Seed Set measurements based on apple variety and region
-Summerred <- filter(SeedSet_stages_Percentage, Apple_variety == 'Summerred') 
+Summerred <- filter(SeedSet_developed, Apple_variety == 'Summerred') 
 
 SummerredSvelvik <- filter(Summerred, Region == 'Svelvik')
 SummerredUllensvang <- filter(Summerred, Region == 'Ullensvang')
 
 
-Discovery <- filter(SeedSet_stages_Percentage, Apple_variety == 'Discovery') 
+Discovery <- filter(SeedSet_developed, Apple_variety == 'Discovery') 
 DiscoverySvelvik <- filter(Discovery, Region == 'Svelvik')
 DiscoveryUllensvang <- filter (Discovery, Region == 'Ullensvang')
 
-Aroma <- filter (SeedSet_stages_Percentage, Apple_variety == 'Aroma')
+Aroma <- filter (SeedSet_developed, Apple_variety == 'Aroma')
 AromaSvelvik <- filter(Aroma, Region == 'Svelvik')
 AromaUllensvang <- filter (Aroma, Region == 'Ullensvang')
 
