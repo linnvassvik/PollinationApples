@@ -3,7 +3,7 @@
 library(lme4)
 #library(patchwork)#??
 library(tidyr)
-library(MASS)
+#library(MASS) #only for glmer.nb?
 
 # import data
 source("R/1_Import_AppleQualityData.R")
