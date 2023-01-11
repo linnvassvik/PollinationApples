@@ -6,34 +6,6 @@ library(patchwork)
 # import data
 source("R/1_Import_AppleQualityData.R")
 
-##### Mann-Whitney U test #####
-
-#All apple varieties combined
-hist(log(SeedSet_average$Average_seeds)) #non-normal distributen on plot
-
-
-shapiro.test(SeedSet_average$Average_seeds)
-
-#Split by the three different apple varieties
-shapiro.test(SeedSet_average$Average_seeds)
-
-#All values are significant, meaning they are not normally distributed
-#data is also not paired, therefore using Mann-Whitney U test:
-
-ggplot(SeedSet_average, aes(x = Treatment, y = Average_seeds, color = Treatment)) +
-  geom_boxplot() + 
-  theme_bw() +
-  facet_wrap(~Apple_variety)
-#Plot: does not look like there is a difference between HP and N, but they are different from C
-
-SeedSet_average_HPN <- SeedSet_average %>% 
-  filter(Treatment != 'C')
-
-WilcoxonTestAllVarieties <- wilcox.test(log(Average_seeds) ~ Treatment, data = SeedSet_average_HPN, 
-                                        paired = FALSE)
-WilcoxonTestAllVarieties
-## DOESNT WORK
-
 
 
 
@@ -70,7 +42,6 @@ summary(ModelSeedSet4)
 ## SEED SET BETWEEN LOCATION ##
 
 ##AROMA##
-####### EVERYTHING IS A MESS --> NOT CORRECT
 
 #Models with fixed and random effects
 SeedSet_Aroma0 <- glmer(Percentage_Seeds_Stage ~ 1 + (1 | Location), family = "poisson", data = Aroma)
@@ -110,3 +81,51 @@ visualize(SeedSet_Aroma4, plot = "model", sample = 50)
 PLAndSeedSetPlot <- ggplot(SeedSet_stages, aes(x = Treatment, y = Total_Seeds_Treatment, color = Location)) +
   geom_boxplot() +
   facet_wrap(~ Location)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##### Mann-Whitney U test #####
+
+#All apple varieties combined
+#hist(log(SeedSet_average$Average_seeds)) #non-normal distributen on plot
+
+#shapiro.test(SeedSet_average$Average_seeds)
+
+#Split by the three different apple varieties
+#shapiro.test(SeedSet_average$Average_seeds)
+
+#All values are significant, meaning they are not normally distributed
+#data is also not paired, therefore using Mann-Whitney U test:
+
+#ggplot(SeedSet_average, aes(x = Treatment, y = Average_seeds, color = Treatment)) +
+#geom_boxplot() + 
+#theme_bw() +
+#facet_wrap(~Apple_variety)
+#Plot: does not look like there is a difference between HP and N, but they are different from C
+
+#SeedSet_average_HPN <- SeedSet_average %>% 
+#filter(Treatment != 'C')
+
+#WilcoxonTestAllVarieties <- wilcox.test(log(Average_seeds) ~ Treatment, data = SeedSet_average_HPN, 
+#paired = FALSE)
+#WilcoxonTestAllVarieties
+## DOESNT WORK
+
