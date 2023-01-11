@@ -3,6 +3,7 @@
 library(lme4)
 #library(patchwork)#??
 library(tidyr)
+library(MASS)
 
 # import data
 source("R/1_Import_AppleQualityData.R")
@@ -21,6 +22,7 @@ source("R/1_Import_AppleQualityData.R")
 # - per apple variety and location
 
 #EAST
+# using negative binomial as the residual plot with poission had the residuals more spread out than the negative binomial residuals
 
 ##### BERLE #######
 # - Aroma
@@ -39,6 +41,7 @@ AIC(SeedSet_AromaB0, SeedSet_AromaB1)
 # Model 0 was the best fit (lowest AIC value) meaning treatment had no effect on seedset
 summary(SeedSet_AromaB0)
 
+
 ## 
 
 # - Discovery
@@ -56,6 +59,8 @@ AIC(SeedSet_DiscoveryB0, SeedSet_DiscoveryB1)
 
 # Model 0 and 1 had the same best fit (lowest AIC value) meaning treatment had no effect on seedset
 summary(SeedSet_DiscoveryB1)
+
+## OBS no difference in residual test, however with BN AIC values showed no difference in models
 
 ## 
 
@@ -93,6 +98,8 @@ AIC(SeedSet_AromaH0, SeedSet_AromaH1)
 
 # Model 1 was the best fit (***; lowest AIC value)
 summary(SeedSet_AromaH1)
+
+
 
 ####
 
@@ -178,3 +185,26 @@ AIC(SeedSet_SummerredS0, SeedSet_SummerredS1)
 
 # Model 0 was the best fit (lowest AIC value)
 summary(SeedSet_SummerredS0)
+
+
+###########################################
+###########################################
+
+### Difference in seed set between orchards in East Norway
+# - Aroma
+
+AromaEast <- Svelvik %>% 
+  filter(Apple_variety == 'Aroma')
+
+SeedSet_AromaSvelvik0 <- glmer(Seeds_fully_developed ~ 1 + (1 | Tree:Location), family = "poisson", data = AromaEast)
+SeedSet_AromaSvelvik1 <- glmer(Seeds_fully_developed ~ Treatment + (1 | Tree:Location), family = "poisson", data = AromaEast)
+SeedSet_AromaSvelvik2 <- glmer(Seeds_fully_developed ~ Treatment + Location + (1 | Tree:Location), family = "poisson", data = AromaEast)
+#SeedSet_AromaSvelvik3 <- glmer(Seeds_fully_developed ~ Treatment * Location + (1 | Tree:Location), family = "poisson", data = AromaEast)
+
+#AIC test
+AIC(SeedSet_AromaSvelvik0, SeedSet_AromaSvelvik1, SeedSet_AromaSvelvik2, SeedSet_AromaSvelvik3)
+
+# Model 0 was the best fit (lowest AIC value)
+summary(SeedSet_AromaSvelvik2)
+
+
